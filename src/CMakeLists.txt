@@ -7,8 +7,12 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 # === test cases ===
+include(GoogleTest)
+
 add_executable(multiply_test multiply_test.cpp)
 target_link_libraries(multiply_test gtest_main)
-
-include(GoogleTest)
 gtest_discover_tests(multiply_test)
+
+add_executable(vector_test vector_test.cpp)
+target_link_libraries(vector_test gtest_main)
+gtest_discover_tests(vector_test)
