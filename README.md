@@ -7,7 +7,7 @@
 
 No functor, memory allocator, adapter, algorithm.
 
-* [ ] vector
+* [x] vector
 * [ ] string
 * [ ] unordered\_map
 * [ ] list
@@ -25,4 +25,3 @@ No functor, memory allocator, adapter, algorithm.
 * [ ] singleton
 * [ ] bloom\_filter
 * something else
-
