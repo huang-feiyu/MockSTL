@@ -20,8 +20,7 @@ No functor, memory allocator, adapter, algorithm.
 
 ## Others
 
-* [ ] shared\_ptr
-* [ ] unique\_ptr
+* [x] shared\_ptr
 * [ ] singleton
 * [ ] bloom\_filter
 * something else

@@ -16,3 +16,7 @@ gtest_discover_tests(multiply_test)
 add_executable(vector_test vector_test.cpp)
 target_link_libraries(vector_test gtest_main)
 gtest_discover_tests(vector_test)
+
+add_executable(shared_ptr_test shared_ptr_test.cpp)
+target_link_libraries(shared_ptr_test gtest_main)
+gtest_discover_tests(shared_ptr_test)
