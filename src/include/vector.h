@@ -95,7 +95,7 @@ void vector<T>::resize_(bool force) {
   /* if v.elements_num == capacity, new capacity = 2 * capacity ; */
   if (capacity_ == 0) {
     capacity_ = 1;
-    arr_ = new int[1];
+    arr_ = new T[1];
     return;
   }
   if (force || size() == capacity()) {
@@ -323,7 +323,7 @@ void vector<T>::resize(size_t size) {
   }
   size_ = size;
   for (auto i = size_; i < capacity_; i++) {
-    arr_[i] = 0;
+    arr_[i] = T{};
   }
 }
 
