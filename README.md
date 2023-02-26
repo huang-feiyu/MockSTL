@@ -21,6 +21,7 @@ No functor, memory allocator, adapter, algorithm.
 ## Others
 
 * [x] shared\_ptr
+* [x] memcpy
 * [ ] singleton
 * [ ] bloom\_filter
 * something else
