@@ -20,3 +20,7 @@ gtest_discover_tests(shared_ptr_test)
 add_executable(memcpy_test memcpy_test.cpp)
 target_link_libraries(memcpy_test gtest_main)
 gtest_discover_tests(memcpy_test)
+
+add_executable(list_test list_test.cpp)
+target_link_libraries(list_test gtest_main)
+gtest_discover_tests(list_test)
