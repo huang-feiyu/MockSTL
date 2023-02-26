@@ -24,3 +24,7 @@ gtest_discover_tests(memcpy_test)
 add_executable(list_test list_test.cpp)
 target_link_libraries(list_test gtest_main)
 gtest_discover_tests(list_test)
+
+add_executable(singleton_test singleton_test.cpp)
+target_link_libraries(singleton_test gtest_main)
+gtest_discover_tests(singleton_test)
