@@ -13,6 +13,7 @@
  * <li>If the objects are potentially-overlapping or not TriviallyCopyable, the behavior of memcpy is not
  * specified and may be undefined.</li>
  * </ul>
+ * But in normal interview, memcpy is treated as memmove. That is: memory overlapping is permitted.
  *
  * @param dst pointer to the memory location to <b>copy to</b>
  * @param src pointer to the memory location to <b>copy from</b>
@@ -21,18 +22,30 @@
  *         <b>dst</b> otherwise
  */
 void *imemcpy(void *dst, const void *src, size_t count) {
-  if (dst == nullptr || src == nullptr) {
+  if ((src == nullptr) || (dst == nullptr)) {
     return nullptr;
   }
-
+  // NOTE: implementation from mit-pdos/xv6
   auto p_dst = static_cast<unsigned char *>(dst);
   auto p_src = static_cast<const unsigned char *>(src);
-  if ((p_dst >= p_src && p_src + count > p_dst) || (p_src >= p_dst && p_dst + count > p_src)) {
-    return nullptr;
-  }
 
-  for (size_t i = 0; i < count; i++) {
-    p_dst[i] = p_src[i];
+  if ((p_src < p_dst) && (p_src + count > p_dst)) {
+    // src: 0x1, 0x2, 0x3
+    // dst:      0x2, 0x3, 0x4
+    p_src += count;  // => src: 0x4
+    p_dst += count;  // => dst: 0x5
+    // count[3]: 0x4 -> 0x3
+    // count[2]: 0x3 -> 0x2
+    // count[1]: 0x2 -> 0x1
+    while (count-- > 0) {
+      *--p_dst = *--p_src;
+    }
+  } else {
+    // src:      0x2, 0x3, 0x4
+    // dst: 0x1, 0x2, 0x3
+    while (count-- > 0) {
+      *p_dst++ = *p_src++;
+    }
   }
   return dst;
 }

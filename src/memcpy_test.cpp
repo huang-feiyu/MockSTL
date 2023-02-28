@@ -44,10 +44,7 @@ TEST(MemcpyTests, TestNULL) {
 }
 
 TEST(MemcpyTests, TestOverlap) {
-  const char *str = "abcdef";
-  auto size = sizeof(str);
-
-  ASSERT_EQ(imemcpy((void *)(str + 1), str, size - 1), nullptr);
-  ASSERT_EQ(imemcpy((void *)(str), str, size), nullptr);
-  ASSERT_EQ(imemcpy((void *)(str - 1), str, size + 1), nullptr);
+  char str[100] = "LudwigHuang";
+  imemcpy(str + 6, str, strlen(str) + 1);
+  ASSERT_EQ(std::string(str), std::string("LudwigLudwigHuang"));
 }
