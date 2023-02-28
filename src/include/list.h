@@ -85,6 +85,7 @@ class list {
     tail_->prev_ = head_;
   }
 
+  // insert before next
   void insert_(const T &val, node *next) {
     auto node = new struct node(val);
     auto prev = next->prev_;
@@ -137,6 +138,14 @@ class list {
       delete curr;
     }
     delete tail_;
+  }
+
+  constexpr list<T> &operator=(const list<T> &other) {
+    clear();
+    for (auto itr = other.begin(); itr != other.end(); itr++) {
+      insert_(*itr, tail_);
+    }
+    return *this;
   }
 
   // iterator
