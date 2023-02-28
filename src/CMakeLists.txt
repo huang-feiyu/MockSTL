@@ -17,6 +17,10 @@ add_executable(shared_ptr_test shared_ptr_test.cpp)
 target_link_libraries(shared_ptr_test gtest_main)
 gtest_discover_tests(shared_ptr_test)
 
+add_executable(unordered_map_test unordered_map_test.cpp)
+target_link_libraries(unordered_map_test gtest_main)
+gtest_discover_tests(unordered_map_test)
+
 add_executable(memcpy_test memcpy_test.cpp)
 target_link_libraries(memcpy_test gtest_main)
 gtest_discover_tests(memcpy_test)

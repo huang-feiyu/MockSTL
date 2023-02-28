@@ -9,8 +9,8 @@ No functor, memory allocator, adapter, algorithm.
 
 * [x] vector
 * [x] list
+* [x] unordered\_map
 * [ ] string
-* [ ] unordered\_map
 * [ ] deque
 * [ ] stack
 * [ ] queue
