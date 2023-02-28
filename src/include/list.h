@@ -29,7 +29,7 @@ class list {
     node *node_{nullptr};
 
    public:
-    Iterator() = delete;
+    Iterator() = default;
     explicit Iterator(node &node) : node_(&node){};
     explicit Iterator(node *node) : node_(node){};
     ~Iterator() = default;
