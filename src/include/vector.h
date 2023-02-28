@@ -386,7 +386,7 @@ constexpr vector<T> &vector<T>::operator=(const vector<T> &other) {
   capacity_ = other.capacity_;
   delete[] arr_;
   arr_ = new T[capacity_];
-  copy(arr_, other.arr_, capacity_);
+  copy_(arr_, other.arr_, capacity_);
 }
 
 template <typename T>
