@@ -64,6 +64,9 @@ class list {
     bool operator==(Iterator other) { return node_ == other.node_; }
     bool operator!=(Iterator other) { return node_ != other.node_; }
 
+    bool operator==(const Iterator other) const { return node_ == other.node_; }
+    bool operator!=(const Iterator other) const { return node_ != other.node_; }
+
     void operator=(const Iterator &other) { node_ = other.node_; }
   };
 
