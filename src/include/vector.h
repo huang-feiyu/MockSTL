@@ -14,6 +14,17 @@ class vector {
   size_t size_{0};      // size of used memory/sizeof(T)
   size_t capacity_{0};  // size of occupied memory/sizeof(T)
 
+  void copy_(T *dst, T *src, size_t size) {
+    auto tmp = new T[size];
+    for (auto i = 0; i < size; i++) {
+      tmp[i] = src[i];
+    }
+    for (auto i = 0; i < size; i++) {
+      dst[i] = tmp[i];
+    }
+    delete[] tmp;
+  }
+
   /* dynamic expansion */
   void resize_(bool force = false);
 
@@ -100,7 +111,7 @@ void vector<T>::resize_(bool force) {
   }
   if (force || size() == capacity()) {
     auto new_arr = new T[capacity() * 2];
-    memcpy(new_arr, arr_, capacity_ * sizeof(T));
+    copy_(new_arr, arr_, size());
     delete[] arr_;
     arr_ = new_arr;
     capacity_ = capacity() * 2;
@@ -122,7 +133,7 @@ vector<T>::vector(T *first, T *last) {
     arr_ = new T[size];
     size_ = size;
     capacity_ = size;
-    memcpy(arr_, first, size * sizeof(T));
+    copy_(arr_, first, size);
     resize_();
   } else {
     throw std::exception();
@@ -157,7 +168,7 @@ vector<T>::vector(const vector<T> &other) {
   capacity_ = other.capacity();
   size_ = other.size();
   resize_();
-  memcpy(arr_, other.arr_, other.size_ * sizeof(T));
+  copy_(arr_, other.arr_, other.size_);
 }
 
 template <typename T>
@@ -244,7 +255,7 @@ template <typename T>
 void vector<T>::erase(vector::iterator pos) {
   for (auto itr = begin(); itr != end(); itr++) {
     if (pos == itr) {
-      memmove(pos, pos + 1, (end() - itr) * sizeof(T));
+      copy_(pos, pos + 1, end() - itr);
       size_--;
       break;
     }
@@ -258,7 +269,7 @@ void vector<T>::erase(vector::iterator first, vector::iterator last) {
       if (last > end()) {
         last = end();
       }
-      memmove(first, last, (end() - itr) * sizeof(T));
+      copy_(first, last, end() - itr);
       size_ -= (last - first);
       break;
     }
@@ -275,7 +286,7 @@ void vector<T>::insert(vector::iterator pos, const T &value) {
     resize_(true);
   }
   auto size_to_move = size_ - idx;
-  memmove(arr_ + idx + 1, arr_ + idx, size_to_move * sizeof(T));
+  copy_(arr_ + idx + 1, arr_ + idx, size_to_move);
   arr_[idx] = value;
   size_++;
 }
@@ -290,7 +301,7 @@ void vector<T>::insert(vector::iterator pos, size_t size, const T &value) {
     resize_(true);
   }
   auto size_to_move = size_ - idx;
-  memmove(arr_ + idx + size, arr_ + idx, size_to_move * sizeof(T));
+  copy_(arr_ + idx + size, arr_ + idx, size_to_move);
   for (auto i = 0; i < size; i++) {
     arr_[idx + i] = value;
   }
@@ -308,7 +319,7 @@ void vector<T>::insert(vector::iterator pos, vector::iterator first, vector::ite
     resize_(true);
   }
   auto size_to_move = size_ - idx;
-  memmove(arr_ + idx + size, arr_ + idx, size_to_move * sizeof(T));
+  copy_(arr_ + idx + size, arr_ + idx, size_to_move);
   auto i = 0;
   for (auto itr = first; itr != last; itr++) {
     arr_[idx + i++] = *itr;
@@ -375,7 +386,7 @@ constexpr vector<T> &vector<T>::operator=(const vector<T> &other) {
   capacity_ = other.capacity_;
   delete[] arr_;
   arr_ = new T[capacity_];
-  memmove(arr_, other.arr_, capacity_ * sizeof(T));
+  copy(arr_, other.arr_, capacity_);
 }
 
 template <typename T>
