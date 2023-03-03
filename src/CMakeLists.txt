@@ -32,3 +32,7 @@ gtest_discover_tests(list_test)
 add_executable(singleton_test singleton_test.cpp)
 target_link_libraries(singleton_test gtest_main)
 gtest_discover_tests(singleton_test)
+
+add_executable(string_test string_test.cpp)
+target_link_libraries(string_test gtest_main)
+gtest_discover_tests(string_test)
